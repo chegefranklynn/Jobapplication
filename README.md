@@ -48,7 +48,7 @@ Follow these steps to set up and use the system:
 3. **Set Up Environment**:
    - Copy the example environment file and configure it:
      ```bash
-     cp config/env.example config/.env
+     cp config/.env
      ```
    - Edit the `.env` file to set your configuration options.
 
@@ -81,11 +81,7 @@ Follow these steps to set up and use the system:
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Contact
 
-For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or support, please contact [chegefranklynn@gmail.com](mailto:your-email@example.com).
 
