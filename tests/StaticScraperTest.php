@@ -1,3 +1,5 @@
+namespace JobApplicationAutomation\Tests;
+
 use PHPUnit\Framework\TestCase;
 use JobApplicationAutomation\Scrapers\StaticScraper;
 use Psr\Log\LoggerInterface;
@@ -22,13 +24,13 @@ class StaticScraperTest extends TestCase
         // Mocking the HTTP response for testing
         $url = 'https://hiring.cafe/';
         
-        $mockHtml = '<div class="job-listing">
-                        <div class="job-title">Software Engineer</div>
-                        <div class="job-description">Develop software solutions.</div>
-                        <div class="job-skills">PHP, JavaScript</div>
-                     </div>';
-        
         // Simulate the scraping process
+        // Here you would need to mock the HTTP request and response
+        // For example, if using Guzzle, you could use a mock client
+
+        // Assuming you have a method to set the HTML response for testing
+        $this->scraper->setMockHtmlResponse($mockHtml); // This is a hypothetical method
+
         $results = $this->scraper->scrape($url);
 
         $this->assertCount(1, $results);
@@ -39,4 +41,3 @@ class StaticScraperTest extends TestCase
 
     // Additional tests for edge cases can be added here
 }
-
