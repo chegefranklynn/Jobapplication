@@ -3,8 +3,8 @@
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
 
-class StaticScraper implements ScraperInterface
-{
+class StaticScraper implements ScraperInterface{
+
     public function scrape(string $url): array
     {
         $client = new HttpBrowser(HttpClient::create());

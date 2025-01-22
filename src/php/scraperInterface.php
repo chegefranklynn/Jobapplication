@@ -1,5 +1,7 @@
 <?php
 
+namespace JobApplicationAutomation\Scrapers;
+
 interface ScraperInterface
 {
     /**
