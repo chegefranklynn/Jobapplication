@@ -48,6 +48,7 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
         'J' => 
         array (
             'JobApplicationAutomation\\Tests\\' => 31,
+            'JobApplicationAutomation\\' => 25,
         ),
         'D' => 
         array (
@@ -131,6 +132,10 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
         'JobApplicationAutomation\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
+        ),
+        'JobApplicationAutomation\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/php',
         ),
         'DeepCopy\\' => 
         array (

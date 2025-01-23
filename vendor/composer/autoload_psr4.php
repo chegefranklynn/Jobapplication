@@ -25,5 +25,6 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'JobApplicationAutomation\\Tests\\' => array($baseDir . '/tests'),
+    'JobApplicationAutomation\\' => array($baseDir . '/src/php'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );
