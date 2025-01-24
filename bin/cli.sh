@@ -2,6 +2,13 @@
 
 # CLI execution script for Job Application Automation System
 
+# Show help if no arguments are provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <command> [options]"
+    echo "Example: $0 scrape https://hiring.cafe/ --type=dynamic"
+    exit 1
+fi
+
 # Define PHP binary
 PHP_BIN=$(which php)
 
@@ -19,3 +26,11 @@ fi
 
 # Run the Symfony Console application
 $PHP_BIN "$(dirname "$0")/../src/cli/run.php" "$@"
+
+# Check if the command was successful
+if [ $? -eq 0 ]; then
+    echo "Command executed successfully."
+else
+    echo "Command failed with an error."
+    exit 1
+fi
