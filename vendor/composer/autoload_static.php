@@ -27,6 +27,7 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\HttpClient\\' => 29,
             'Symfony\\Component\\String\\' => 25,
+            'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\HttpClient\\' => 29,
             'Symfony\\Component\\DomCrawler\\' => 29,
             'Symfony\\Component\\CssSelector\\' => 30,
@@ -47,8 +48,8 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
         ),
         'J' => 
         array (
-            'JobApplicationAutomation\\Tests\\' => 31,
-            'JobApplicationAutomation\\' => 25,
+            'JobApplication\\php\\' => 19,
+            'JobApplication\\Tests\\' => 21,
         ),
         'D' => 
         array (
@@ -84,6 +85,10 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
         'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'Symfony\\Component\\HttpClient\\' => 
         array (
@@ -129,13 +134,13 @@ class ComposerStaticInitb24b967cbaf09a01de6039a4262e2216
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-        'JobApplicationAutomation\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/tests',
-        ),
-        'JobApplicationAutomation\\' => 
+        'JobApplication\\php\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/php',
+        ),
+        'JobApplication\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'DeepCopy\\' => 
         array (

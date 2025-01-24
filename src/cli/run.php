@@ -7,6 +7,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+use JobApplication\php\ScraperFactory; // Import ScraperFactory
+use Exception; // Import Exception
 
 // CLI Skeleton
 $application = new Application('Job Application Automation CLI', '1.0.0');
@@ -20,17 +23,20 @@ class ScrapeCommand extends Command
     {
         $this
             ->setDescription('Scrape job listings from target websites.')
-            ->addArgument('url', InputArgument::REQUIRED, 'The URL of the website to scrape.');
+            ->addArgument('url', InputArgument::REQUIRED, 'The URL of the website to scrape.')
+            ->addOption('type', 't', InputOption::VALUE_OPTIONAL, 'The type of scraper to use (static or dynamic).', 'static');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $url = $input->getArgument('url');
+        $type = $input->getOption('type');
 
-        $output->writeln("Starting scraping for URL: $url");
+        $output->writeln("Starting scraping for URL: $url using $type scraper...");
 
         try {
-            $scraper = ScraperFactory::createScraper('static'); // Use the factory to create a scraper
+            // Use the factory to create a scraper
+            $scraper = ScraperFactory::createScraper($type);
             $results = $scraper->scrape($url);
 
             foreach ($results as $job) {
