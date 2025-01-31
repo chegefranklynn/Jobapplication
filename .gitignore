@@ -32,3 +32,9 @@ coverage/
 # Ignore build artifacts
 /build/
 .cursorrules
+
+#Documentation
+/docs/
+
+#requirements
+/requirements/

@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use JobApplication\php\ScraperFactory; // Import ScraperFactory
-use Exception; // Import Exception
+
 
 // CLI Skeleton
 $application = new Application('Job Application Automation CLI', '1.0.0');
@@ -28,28 +27,27 @@ class ScrapeCommand extends Command
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $url = $input->getArgument('url');
-        $type = $input->getOption('type');
+{
+    $url = $input->getArgument('url');
+    $type = $input->getOption('type');
 
-        $output->writeln("Starting scraping for URL: $url using $type scraper...");
+    try {
+        $factory = new ScraperFactory();
+        $scraper = $factory->create($type, $url);  // Validation happens here
+        
+        $results = $scraper->scrape($url);
 
-        try {
-            // Use the factory to create a scraper
-            $scraper = ScraperFactory::createScraper($type);
-            $results = $scraper->scrape($url);
-
-            foreach ($results as $job) {
-                $output->writeln("Job Found: " . json_encode($job));
-            }
-
-            $output->writeln("Scraping completed successfully.");
-            return Command::SUCCESS;
-        } catch (Exception $e) {
-            $output->writeln("Error during scraping: " . $e->getMessage());
-            return Command::FAILURE;
+        foreach ($results as $job) {
+            $output->writeln("Job Found: " . json_encode($job));
         }
+
+        $output->writeln("Scraping completed successfully.");
+        return Command::SUCCESS;
+    } catch (\Exception $e) {
+        $output->writeln("<error>Error during scraping: " . $e->getMessage() . "</error>");
+        return Command::FAILURE;
     }
+}
 }
 
 // Add Commands to Application

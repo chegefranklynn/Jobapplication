@@ -1,6 +1,6 @@
 <?php
 
-namespace JobApplicationAutomation\Scraper;
+namespace JobApplication\php;
 
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
@@ -9,6 +9,7 @@ use Psr\Log\LoggerInterface;
 class StaticScraper implements ScraperInterface
 {
     private ?LoggerInterface $logger;
+    private HttpBrowser $client;
 
     /**
      * @param LoggerInterface|null $logger Logger for error logging (optional).
@@ -16,6 +17,12 @@ class StaticScraper implements ScraperInterface
     public function __construct(?LoggerInterface $logger = null)
     {
         $this->logger = $logger;
+        $this->client = new HttpBrowser(HttpClient::create());
+    }
+
+    public function setHttpBrowser(HttpBrowser $client): void
+    {
+        $this->client = $client;
     }
 
     /**
@@ -28,25 +35,23 @@ class StaticScraper implements ScraperInterface
      */
     public function scrape(string $url): array
     {
-        // Validate the URL
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException('Invalid URL provided: ' . $url);
+            throw new \InvalidArgumentException('Invalid URL: ' . $url);
         }
 
-        // Initialize the HTTP client
-        $client = new HttpBrowser(HttpClient::create());
-
         try {
-            $crawler = $client->request('GET', $url);
+            $crawler = $this->client->request('GET', $url);
             $jobs = [];
 
             $crawler->filter('.job-listing')->each(function ($node) use (&$jobs) {
                 $jobs[] = [
-                    'title' => $node->filter('.job-title')->count() > 0 ? $node->filter('.job-title')->text('') : 'N/A',
-                    'company' => $node->filter('.job-company')->count() > 0 ? $node->filter('.job-company')->text('') : 'N/A',
-                    'location' => $node->filter('.job-location')->count() > 0 ? $node->filter('.job-location')->text('') : 'N/A',
-                    'description' => $node->filter('.job-description')->count() > 0 ? $node->filter('.job-description')->text('') : 'N/A',
-                    'skills' => $node->filter('.job-skills')->count() > 0 ? $node->filter('.job-skills')->text('') : 'N/A',
+                    'title' => $this->safeText($node, '.job-title'),
+                    'company' => $this->safeText($node, '.job-company'),
+                    'location' => $this->safeText($node, '.job-location'),
+                    'description' => $this->safeText($node, '.job-description'),
+                    'skills' => $this->safeText($node, '.job-skills'),
+                    'environment' => $this->safeText($node, '.job-environment'),
+                    'commitment' => $this->safeText($node, '.job-commitment')
                 ];
             });
 
@@ -63,5 +68,12 @@ class StaticScraper implements ScraperInterface
             }
             throw new \RuntimeException('Error during scraping: ' . $e->getMessage());
         }
+    }
+
+    private function safeText($node, string $selector): string
+    {
+        return $node->filter($selector)->count() > 0 
+            ? trim($node->filter($selector)->text(''))
+            : 'N/A';
     }
 }
