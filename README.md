@@ -109,7 +109,4 @@ project-root/
 
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-## Contact
-
-For questions or support, please contact [chegefranklynn@gmail.com](mailto:your-email@example.com).
 
