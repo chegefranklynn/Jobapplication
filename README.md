@@ -72,8 +72,6 @@ npm install --prefix ./src/node
   --timeout=30 \
   --headless
 ```
-
-
 ## Testing
 ```bash
 # Run all tests with coverage
