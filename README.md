@@ -73,26 +73,6 @@ npm install --prefix ./src/node
   --headless
 ```
 
-## Project Structure
-```plaintext
-project-root/
-├── src/
-│   ├── php/
-│   │   ├── Contracts/
-│   │   │   └── ScraperInterface.php
-│   │   ├── StaticScraper.php
-│   │   ├── DynamicScraper.php
-│   │   └── ScraperFactory.php
-│   ├── node/
-│   │   └── puppeteer-scraper.js
-│   └── cli/
-│       └── console
-├── tests/
-│   ├── StaticScraperTest.php
-│   └── DynamicScraperTest.php
-└── config/
-    └── scraping.yaml
-```
 
 ## Testing
 ```bash
