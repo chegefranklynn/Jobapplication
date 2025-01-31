@@ -55,7 +55,7 @@ A PHP-based solution for automating job application processes with secure web sc
 
 ### Installation
 ```bash
-git clone https://github.com/your-org/job-application-automation.git
+git clone https://github.com/chegefranklynn/Jobapplication.git
 cd job-application-automation
 composer install
 npm install --prefix ./src/node
