@@ -1,10 +1,11 @@
 <?php
 
-namespace JobApplication\php;
+namespace App\patterns;
 
-use JobApplication\php\StaticScraper;
-use JobApplication\php\DynamicScraper;
-use JobApplication\php\ScraperInterface;
+
+use App\Domain\scraping\StaticScraper;
+use App\Domain\scraping\DynamicScraper;
+use App\Domain\scraping\ScraperInterface;
 use InvalidArgumentException;
 
 class ScraperFactory

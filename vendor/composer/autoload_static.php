@@ -18,6 +18,10 @@ class ComposerStaticInit4b7147cffdc5c7a7b788857c3b1c06e2
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Tests\\' => 6,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -29,6 +33,7 @@ class ComposerStaticInit4b7147cffdc5c7a7b788857c3b1c06e2
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\HttpClient\\' => 29,
+            'Symfony\\Component\\Dotenv\\' => 25,
             'Symfony\\Component\\DomCrawler\\' => 29,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
@@ -46,18 +51,21 @@ class ComposerStaticInit4b7147cffdc5c7a7b788857c3b1c06e2
             'Monolog\\' => 8,
             'Masterminds\\' => 12,
         ),
-        'J' => 
-        array (
-            'JobApplication\\php\\' => 19,
-            'JobApplication\\Tests\\' => 21,
-        ),
         'D' => 
         array (
             'DeepCopy\\' => 9,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -93,6 +101,10 @@ class ComposerStaticInit4b7147cffdc5c7a7b788857c3b1c06e2
         'Symfony\\Component\\HttpClient\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-client',
+        ),
+        'Symfony\\Component\\Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
         'Symfony\\Component\\DomCrawler\\' => 
         array (
@@ -134,17 +146,13 @@ class ComposerStaticInit4b7147cffdc5c7a7b788857c3b1c06e2
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-        'JobApplication\\php\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/php',
-        ),
-        'JobApplication\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/tests',
-        ),
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/php',
         ),
     );
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace JobApplication\php;
+namespace App\Domain\scraping\contracts;
 
 interface ScraperInterface
 {

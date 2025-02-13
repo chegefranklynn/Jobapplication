@@ -1,9 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use JobApplicationAutomation\Factory\ScraperFactory;
-use JobApplicationAutomation\Scrapers\StaticScraper;
-use JobApplicationAutomation\Scrapers\DynamicScraper;
+use App\patterns\ScraperFactory;
+use App\Domain\scraping\StaticScraper;
+use App\Domain\scraping\DynamicScraper;
 use InvalidArgumentException;
 
 class ScraperFactoryTest extends TestCase

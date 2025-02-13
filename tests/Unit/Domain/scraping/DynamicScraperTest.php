@@ -1,8 +1,8 @@
 <?php 
-namespace Tests;
+namespace Tests\Unit\Domain\Scraping;
 
 use PHPUnit\Framework\TestCase;
-use JobApplication\php\DynamicScraper;
+use App\Domain\Scraping\Contracts\DynamicScraper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;

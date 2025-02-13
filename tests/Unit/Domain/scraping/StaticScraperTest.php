@@ -1,9 +1,11 @@
 <?php
 
-namespace JobApplication\Tests;
+declare(strict_types=1);
+
+namespace Tests\Unit\Domain\Scraping;
 
 use PHPUnit\Framework\TestCase;
-use JobApplication\php\StaticScraper;
+use App\Domain\Scraping\Contracts\StaticScraper;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Psr\Log\LoggerInterface;

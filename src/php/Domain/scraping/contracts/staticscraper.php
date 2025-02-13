@@ -1,10 +1,13 @@
 <?php
 
-namespace JobApplication\php;
+declare(strict_types=1);
+
+namespace App\Domain\Scraping\Contracts;
 
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerInterface; 
+use App\Domain\Scraping\Contracts\ScraperInterface;
 
 class StaticScraper implements ScraperInterface
 {

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use JobApplication\php\ScraperFactory; // Import ScraperFactory
+use App\cli\Commands\GenerateDocsCommand;
 
 
 // CLI Skeleton
@@ -52,6 +53,8 @@ class ScrapeCommand extends Command
 
 // Add Commands to Application
 $application->add(new ScrapeCommand());
+$application->add(new GenerateDocsCommand());
+
 
 // Run the CLI Application
 $application->run();

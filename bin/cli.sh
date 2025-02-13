@@ -28,7 +28,7 @@ fi
 $PHP_BIN "$(dirname "$0")/../src/cli/run.php" "$@"
 
 # Check if the command was successful
-if [ $? -eq 0 ]; then
+if $PHP_BIN "$(dirname "$0")/../src/cli/run.php" "$@"; then
     echo "Command executed successfully."
 else
     echo "Command failed with an error."

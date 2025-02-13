@@ -6,6 +6,7 @@ vendor/
 
 # Ignore environment configuration files
 config/.env
+.env
 
 # Ignore log files
 logs/*.log
