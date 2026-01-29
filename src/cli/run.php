@@ -1,7 +1,9 @@
+#!/usr/bin/env php
 <?php
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 use Symfony\Component\Console\Application;
+use App\Infrastructure\Database\MigrationCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -58,3 +60,9 @@ $application->add(new GenerateDocsCommand());
 
 // Run the CLI Application
 $application->run();
+
+//Migration Command
+
+$app = new Application('Job Application CLI', '1.0.0');
+$app->add(new MigrationCommand());
+$app->run();

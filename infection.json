@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/infection/infection/master/resources/schema.json",
+    "source": {
+        "directories": [
+            {
+                "path": "src/php",
+                "exclude": ["Exceptions"]
+            }
+        ]
+    },
+    "timeout": 10,
+    "testFramework": "phpunit",
+    "mutators": {
+        "@default": true
+    },
+    "loggers": {
+        "text": {
+            "file": "infection.log"
+        }
+    }
+}

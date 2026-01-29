@@ -82,7 +82,6 @@ npm install --prefix ./src/node
 # - StaticScraper: 92%
 # - DynamicScraper: 89%
 ```
-
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.

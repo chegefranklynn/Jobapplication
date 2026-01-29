@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Domain\scraping\contracts;
+declare(strict_types=1);
+
+namespace App\Domain\Scraping\Contracts;
 
 interface ScraperInterface
 {

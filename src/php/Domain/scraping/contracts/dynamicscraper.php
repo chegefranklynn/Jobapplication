@@ -6,6 +6,7 @@ namespace App\Domain\Scraping\Contracts;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Psr\Log\LoggerInterface;
+use HeadlessChromium\BrowserFactory;
 
 class DynamicScraper implements ScraperInterface
 {
@@ -13,12 +14,14 @@ class DynamicScraper implements ScraperInterface
     private int $timeout;
     private ?LoggerInterface $logger;
     private ?Process $process = null; // Add this property
+    private BrowserFactory $browserFactory;
 
     public function __construct(string $scriptPath, int $timeout = 30, ?LoggerInterface $logger = null)
     {
         $this->scriptPath = $scriptPath;
         $this->timeout = $timeout;
         $this->logger = $logger;
+        $this->browserFactory = new BrowserFactory();
     }
 
     // Add this method
@@ -29,39 +32,31 @@ class DynamicScraper implements ScraperInterface
 
     public function scrape(string $url): array
     {
-        // Validate the URL
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new \InvalidArgumentException('Invalid URL provided: ' . $url);
-        }
-
-        // Use $this->process if set, otherwise create a new Process
-        $process = $this->process ?? new Process(['node', $this->scriptPath, $url]);
-        $process->setTimeout($this->timeout);
-
+        $browser = $this->browserFactory->createBrowser([
+            'headless' => true,
+            'noSandbox' => true,
+        ]);
+        
         try {
-            $process->run();
-
-            if (!$process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
-
-            $output = $process->getOutput();
-            $decodedOutput = json_decode($output, true);
-
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \RuntimeException('Invalid JSON output from Puppeteer: ' . json_last_error_msg());
-            }
-
-            return $decodedOutput;
-        } catch (\Exception $e) {
-            if ($this->logger) {
-                $this->logger->error('Puppeteer scraping failed: ' . $e->getMessage(), [
-                    'url' => $url,
-                    'scriptPath' => $this->scriptPath,
-                ]);
-            }
-
-            throw $e;
+            $page = $browser->createPage();
+            $page->navigate($url)->waitForNavigation();
+            
+            // Wait for dynamic content
+            $page->evaluate('document.querySelector(".jobs-list").scrollIntoView()');
+            sleep(2); // Allow time for AJAX loading
+            
+            // Get rendered HTML
+            $html = $page->evaluate('document.documentElement.outerHTML')->getReturnValue();
+            
+            return $this->parseHtml($html);
+        } finally {
+            $browser->close();
         }
+    }
+
+    private function parseHtml(string $html): array
+    {
+        // Implementation using DOMDocument or Symfony DomCrawler
+        // ... existing parsing logic ...
     }
 }

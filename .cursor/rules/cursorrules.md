@@ -1,0 +1,225 @@
+# Job Application Automation System - Cursor Rules
+
+## Project Overview
+This is a PHP-based Job Application Automation System using Domain Driven Design (DDD) principles. The system automates job application processes with secure web scraping, resume parsing, qualification matching, and application submission.
+
+## Architecture & DDD Principles
+
+### Domain Layer (`src/php/Domain/`)
+- **Models**: Core business entities (Applicant, Job, Resume, Match)
+- **Value Objects**: Immutable objects (Email, Phone, Skill, Experience)
+- **Services**: Domain logic and business rules
+- **Repositories**: Abstract data access contracts
+- **Events**: Domain events for business processes
+
+### Application Layer (`src/php/Application/`)
+- **Use Cases**: Application services orchestrating domain operations
+- **Commands**: Input handling and validation
+- **Queries**: Data retrieval operations
+- **DTOs**: Data transfer objects for external communication
+
+### Infrastructure Layer (`src/php/Infrastructure/`)
+- **Database**: PDO-based repositories with encryption
+- **Scraping**: Static and dynamic web scrapers
+- **Security**: Encryption, validation, sanitization
+- **External Services**: API integrations, file processing
+
+## Code Standards
+
+### PHP Requirements
+- **PHP 8.3+** with strict typing
+- **PSR-4** autoloading
+- **Composer** for dependency management
+- **PHPUnit** for testing (90%+ coverage target)
+
+### DDD Implementation Rules
+1. **Domain First**: Always start with domain models and business logic
+2. **Dependency Inversion**: Infrastructure depends on domain, not vice versa
+3. **Aggregate Roots**: Manage consistency boundaries (Applicant, Job)
+4. **Value Objects**: Use for immutable data (Email, Phone, Skills)
+5. **Repository Pattern**: Abstract data access in domain layer
+
+### File Structure
+```
+src/php/
+├── Domain/
+│   ├── Models/           # Entities and Aggregates
+│   ├── ValueObjects/     # Immutable objects
+│   ├── Services/         # Domain services
+│   ├── Repositories/     # Repository interfaces
+│   └── Events/          # Domain events
+├── Application/
+│   ├── UseCases/        # Application services
+│   ├── Commands/        # Command handlers
+│   └── Queries/         # Query handlers
+├── Infrastructure/
+│   ├── Database/        # Repository implementations
+│   ├── Scraping/        # Web scrapers
+│   ├── Security/        # Encryption, validation
+│   └── External/        # Third-party integrations
+└── Presentation/
+    ├── CLI/            # Console commands
+    └── Web/            # Web controllers (future)
+```
+
+## Security Requirements
+
+### Input Validation
+- Validate all external inputs (URLs, file uploads, user data)
+- Use type hints and strict typing
+- Sanitize HTML content from scraped data
+- Validate file types for resume uploads
+
+### Data Protection
+- Encrypt sensitive data (resumes, personal info) at application level
+- Use environment variables for secrets
+- Implement secure key management
+- No sensitive data in error messages
+
+### Process Isolation
+- Dynamic scrapers run in separate Node.js processes
+- Memory limits for Puppeteer instances
+- Rate limiting for scraping operations
+
+## Database Standards
+
+### Multi-Database Support
+- **Primary**: PostgreSQL with pgcrypto
+- **Alternative**: MySQL with AES encryption
+- Use PDO with prepared statements
+- Repository pattern for data access
+
+### Schema Requirements
+- Encrypted fields for sensitive data
+- Proper indexing for performance
+- Foreign key constraints
+- Audit trails for critical operations
+
+## Testing Standards
+
+### Test Coverage
+- **Domain**: 100% coverage for business logic
+- **Infrastructure**: 90%+ for critical paths
+- **Application**: 85%+ for use cases
+- Use PHPUnit with coverage reporting
+
+### Test Structure
+```
+tests/
+├── Unit/              # Domain and application tests
+├── Integration/       # Database and external service tests
+├── Feature/          # End-to-end scenarios
+└── Fixtures/         # Test data and mocks
+```
+
+## CLI Commands
+
+### Scraping Commands
+```bash
+# Auto-detect scraper type
+./bin/console scrape <url>
+
+# Explicit scraper with options
+./bin/console scrape <url> --type=dynamic --timeout=30 --headless
+```
+
+### Database Commands
+```bash
+# Backup (PostgreSQL/MySQL)
+./scripts/database/backup.sh
+
+# Restore and validate
+./scripts/database/restore_test.sh
+```
+
+## Development Guidelines
+
+### Code Quality
+- Follow PSR-12 coding standards
+- Use meaningful variable and method names
+- Keep methods under 20 lines
+- Write self-documenting code
+
+### Error Handling
+- Use custom exceptions for domain errors
+- Log errors with context (no sensitive data)
+- Graceful degradation for external services
+- User-friendly error messages
+
+### Performance
+- Lazy loading for large datasets
+- Caching for frequently accessed data
+- Async processing for long-running tasks
+- Memory management for scraping operations
+
+## Deployment Considerations
+
+### Environment Setup
+- PHP 8.3+ with required extensions
+- Node.js 18+ for dynamic scraping
+- PostgreSQL 13+ or MySQL 8.0+
+- Composer and npm dependencies
+
+### Security in Production
+- Environment variable encryption
+- Secure credential management
+- Regular security updates
+- Monitoring and alerting
+
+## File Naming Conventions
+
+### Classes
+- **Entities**: `Applicant.php`, `Job.php`
+- **Value Objects**: `Email.php`, `Skill.php`
+- **Services**: `ApplicantService.php`, `MatchingService.php`
+- **Repositories**: `ApplicantRepository.php`, `JobRepository.php`
+
+### Files
+- Use PascalCase for class files
+- Use snake_case for configuration files
+- Use kebab-case for CLI scripts
+
+## Documentation Requirements
+
+### Code Documentation
+- PHPDoc for all public methods
+- Type hints for all parameters and returns
+- Examples for complex business logic
+- Architecture decisions in comments
+
+### API Documentation
+- Clear method signatures
+- Parameter validation rules
+- Return value specifications
+- Error condition handling
+
+## Integration Points
+
+### External Services
+- Web scraping (Static/Dynamic)
+- Resume parsing (PDF/DOCX)
+- Job board APIs
+- Email notifications
+
+### Data Flow
+1. **Scraping**: Extract job listings
+2. **Parsing**: Process resumes and job requirements
+3. **Matching**: Score compatibility
+4. **Application**: Submit applications
+5. **Tracking**: Monitor results
+
+## Maintenance
+
+### Regular Tasks
+- Update dependencies monthly
+- Review security patches weekly
+- Backup database daily
+- Monitor scraping success rates
+
+### Monitoring
+- Track scraping performance
+- Monitor database health
+- Alert on encryption failures
+- Log application submissions
+
+Remember: Always prioritize domain logic, maintain clear boundaries between layers, and ensure security is built-in from the start.
