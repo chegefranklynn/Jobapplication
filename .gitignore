@@ -7,9 +7,11 @@ vendor/
 # Ignore environment configuration files
 config/.env
 .env
+.gitignore
+.env.example
 
 # Ignore log files
-logs/*.log
+logs
 
 # Ignore system files
 .DS_Store
@@ -32,7 +34,7 @@ coverage/
 
 # Ignore build artifacts
 /build/
-.cursorrules
+.cursor/rules
 
 #Documentation
 /docs/
